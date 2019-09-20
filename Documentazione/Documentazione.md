@@ -87,11 +87,22 @@
 
   |**ID**	|**Nome**			|**Priorità**|**Vers**|**Note**  |
   |----|------------|--------|----|------|
-  |Req-1|Si dovrà poter resettare o aggiungere i punti|1|1.0|...|
-  |Req-2|Ci dovrà essere un tasto per generare il fiocco di neve|1|1.0|...|
-  |Req-3|Si deve poter salvare il fiocco di neve come immagine|1|1.0|...|
-  |Req-4|Si deve poter salvare la posizione dei punti|1|1.0|...|
-  |Req-5|Dovrà esserci un sito con download e descrizione del progetto|1|1.0|...|
+  |Req-01|Il programma dovrà essere in Java|1|1.0|...|
+  |Req-02|La finestra dovrà essere ridimensionabile|1|1.0|...|
+  |Req-03|Si dovrà poter resettare o aggiungere i punti|1|1.0|...|
+  |Req-04|Si dovranno poter creare uno o più poligoni|1|1.0|...|
+  |Req-05|Ci dovrà essere un tasto per generare il fiocco di neve|1|1.0|...|
+  |Req-06|Si deve poter salvare il fiocco di neve come immagine|1|1.0|...|
+  |Req-07|La dimensione dell'immagine dovrà essere 500x500 Raster|1|1.0|...|
+  |Req-08|Si deve poter salvare la posizione dei punti|1|1.0|...|
+  |Req-09|Salvataggio in un file|1|1.0|...|
+  |Req-10| Formato salvataggio punti --> JSON, CSV, o serializzazione di oggetti|1|1.0|...|
+  |Req-11|Per importare esplora file o pagina che mostra direttamente tutti i file|1|1.0|...|
+  |Req-12|Dovrà esserci un sito con download e descrizione del progetto|1|1.0|...|
+  |Req-13|Nel sito dovranno esserci Lista req. di sistema, JRE, guida con screenshots|1|1.0|...|
+  |Req-14|Fornire class per github, JAR per l'esecuzione|1|1.0|...|
+
+
 
 ### Use case
 
