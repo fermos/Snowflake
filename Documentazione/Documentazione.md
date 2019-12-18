@@ -106,23 +106,23 @@
 
 ### Use case
 
-I casi d’uso rappresentano l’interazione tra i vari attori e le
-funzionalità del prodotto.
+L'utente può tagliare il triangolo iniziale e
+generarci un fiocco di neve dopodiché potrà salvare i punti
+e ricaricarli quando vuole.
 
 ### Pianificazione
 
-Prima di stabilire una pianificazione bisogna avere almeno una vaga idea
-del modello di sviluppo che si intende adottare. In questa sezione
-bisognerà inserire il modello concettuale di sviluppo che si seguirà
-durante il progetto. Gli elementi di riferimento per una buona
-pianificazione derivano da una scomposizione top-down della problematica
-del progetto.
-
-La pianificazione può essere rappresentata mediante un diagramma di
-Gantt.
-
-Se si usano altri metodi di pianificazione (es scrum), dovranno apparire
-in questo capitolo.
+|**Nome**	|**Componente**|**Utilizzo**|
+|---------|--------------|------------|
+|New Snowflake|Button|Permette di creare un nuovo fiocco di neve.|
+|Open Snowflake|Button|Permette di creare un nuovo fiocco di neve.|
+|Genera live|Button|Attiva la generazione live del fiocco di neve.|
+|Save Points|Button + FilePicker|Permette di salvare i punti in un file.|
+|Import Points|Button + FilePicker|Permette di importare dei punti salvati in precedenza in un file.|
+|Delete Points|Button|Cancella tutti i punti creati.|
+|Subtract/Intersect|2 CheckBox|Permette di scegliere se usare il metodo Intersect o Subtract per creare il fiocco di neve.|
+|Show Points|CheckBox|Permette di scegliere se vedere o no i punti creati.|
+|Darkmode|CheckBox|Permette di attivare e disattivare la darkmode.|
 
 ### Analisi dei mezzi
 
@@ -139,173 +139,150 @@ Il software verrà eseguito su qualsiasi piattaforma supporti Java.
 Il programma avrà un triangolo ritagliabile tramite dei click del mouse o touchscreen/touchpad. Partendo da questo triangolo il software dovrà creare un fiocco di neve come se il triangolo fosse stato aperto (come con carta e forbici).
 
 ### Design dell’architettura del sistema
-
-Descrive:
-
--   La struttura del programma/sistema lo schema di rete...
-
--   Gli oggetti/moduli/componenti che lo compongono.
-
--   I flussi di informazione in ingresso ed in uscita e le
-    relative elaborazioni. Può utilizzare *diagrammi di flusso dei
-    dati* (DFD).
-
--   Eventuale sitemap
+<h4>Diagramma UML del software</h4>
+<img src="Immagini/UML.png" alt="UML.png" style="float left;"/>
 
 ### Design dei dati e database
 
-Descrizione delle strutture di dati utilizzate dal programma in base
-agli attributi e le relazioni degli oggetti in uso.
-
-### Schema E-R, schema logico e descrizione.
-
-Se il diagramma E-R viene modificato, sulla doc dovrà apparire l’ultima
-versione, mentre le vecchie saranno sui diari.
+I dati sono salvati su diverse classi e si gestiscono tra di lavoro
+attraverso setter e getter.
 
 ### Design delle interfacce
 
-Descrizione delle interfacce interne ed esterne del sistema e
-dell’interfaccia utente. La progettazione delle interfacce è basata
-sulle informazioni ricavate durante la fase di analisi e realizzata
-tramite mockups.
+Durante il progetto ho cambiato idea sul come fare l'interfaccia e credo che il risultato finale sia meglio di quello che avevo progettato. Ho fatto in modo che il fiocco di neve si generi intorno al triangolo perché credo sia bello da vedere e diverso dagli altri. Inoltre ho aggiunto una Home dove si può creare o caricare il fiocco prima di iniziare.
+
+<h4>Interfaccia progettata:</h4>
+<img src="Immagini/guiproject.png" alt="guiproject.png" style="float left;"/>
+
+<h4>Interfacce finali:</h4>
+<img src="Immagini/gui_home.png" alt="gui_home.png" style="float left;"/>
+<p></p>
+<img src="Immagini/gui.png" alt="gui.png" style="float left;"/>
 
 ### Design procedurale
 
-Descrive i concetti dettagliati dell’architettura/sviluppo utilizzando
-ad esempio:
-
--   Diagrammi di flusso e Nassi.
-
--   Tabelle.
-
--   Classi e metodi.
-
--   Tabelle di routing
-
--   Diritti di accesso a condivisioni …
-
-Questi documenti permetteranno di rappresentare i dettagli procedurali
-per la realizzazione del prodotto.
+[Documentazione java](javadoc/index.html/)
 
 ## Implementazione
 
-In questo capitolo dovrà essere mostrato come è stato realizzato il
-lavoro. Questa parte può differenziarsi dalla progettazione in quanto il
-risultato ottenuto non per forza può essere come era stato progettato.
+Descrizione classi:
 
-Sulla base di queste informazioni il lavoro svolto dovrà essere
-riproducibile.
+<h4>StartFrame:</h4>
+Il frame che si apre inizialmente che permette di o creare un nuovo fiocco di neve o di importarlo da un file. Dopo la selezione di una delle due opzioni si passa a SnowflakeFrame.
 
-In questa parte è richiesto l’inserimento di codice sorgente/print
-screen di maschere solamente per quei passaggi particolarmente
-significativi e/o critici.
+<h4>SnowflakeFrame:</h4>
+Si tratta del frame che ospita l'applicazione principale con i vari panel tra cui SnowflakePanel.
 
-Inoltre dovranno essere descritte eventuali varianti di soluzione o
-scelte di prodotti con motivazione delle scelte.
+<h4>SnowflakePanel:</h4>
+Si occupa di praticamente tutto il funzionamento dell'applicazione. Si occupa dei tagli del triangolo e della generazione del fiocco con tutte le funzioni in più come: Cancellare i punti, mettere la darkmode, nascondere i punti, ...
 
-Non deve apparire nessuna forma di guida d’uso di librerie o di
-componenti utilizzati. Eventualmente questa va allegata.
+<h4>Saver:</h4>
+Questa classe si occupa di salvare e importare da dei file .flake, e lo fa interagendo con la classe SnowflakePanel.
 
-Per eventuali dettagli si possono inserire riferimenti ai diari.
+
 
 ## Test
 
 ### Protocollo di test
 
-Definire in modo accurato tutti i test che devono essere realizzati per
-garantire l’adempimento delle richieste formulate nei requisiti. I test
-fungono da garanzia di qualità del prodotto. Ogni test deve essere
-ripetibile alle stesse condizioni.
-
-
-|Test Case      | TC-001                               |
+|Test Case      | TC-001                         |
 |---------------|--------------------------------------|
-|**Nome**       |Import a card, but not shown with the GUI |
-|**Riferimento**|REQ-012                               |
-|**Descrizione**|Import a card with KIC, KID and KIK keys with no obfuscation, but not shown with the GUI |
-|**Prerequisiti**|Store on local PC: Profile\_1.2.001.xml (appendix n\_n) and Cards\_1.2.001.txt (appendix n\_n) |
-|**Procedura**     | - Go to “Cards manager” menu, in main page click “Import Profiles” link, Select the “1.2.001.xml” file, Import the Profile - Go to “Cards manager” menu, in main page click “Import Cards” link, Select the “1.2.001.txt” file, Delete the cards, Select the “1.2.001.txt” file, Import the cards |
-|**Risultati attesi** |Keys visible in the DB (OtaCardKey) but not visible in the GUI (Card details) |
+|**Nome**       |Aggiunta/rimozione dei punti |                          |
+|**Descrizione**|I punti devono poter essere aggiunti con un click sinistro e rimossi con un click destro. |
+|**Prerequisiti**|No. |
+|**Procedura**     | Aprire la schermata principale del programma e creare dei punti cliccando con il tasto sinistro del mouse, dopodiché cliccare sopra ai punti per cancellarli.  |
+|**Risultati attesi** |I punti vengono creati con il click sinistro e dopodiché possono essere cancellati con il click destro. |
 
+|Test Case      | TC-002                             |
+|---------------|--------------------------------------|
+|**Nome**       |Taglio del triangolo. |                         |
+|**Descrizione**|Appena vengono aggiunti almeno 3 punti il triangolo iniziale dovra cominciare a tagliarsi in base ad essi.|
+|**Prerequisiti**|Aggiunta/rimozione dei punti |
+|**Procedura**     | Aggiungere tre punti e controllare se il triangolo si taglia, dopodiché continuare ad aggiungerne e verificare che il triangolo continui a tagliarsi. |
+|**Risultati attesi** |Da quando vengono aggiunti 3 punti il triangolo comincia a tagliarsi e aggiungendone il risultato continua a cambiare. |
+
+|Test Case      | TC-003                               |
+|---------------|--------------------------------------|
+|**Nome**       |Generazione live del fiocco. |                         |
+|**Descrizione**|Dopo aver cliccato sul Button "Genera live" l'applicazione dovrà generare in live il fiocco di neve risultante dal triangolo. |
+|**Prerequisiti**|Taglio del triangolo |
+|**Procedura**     | Inserire qualche punto per tagliare il triangolo, cliccare il Button "Genera live" e vedere se si genera il fiocco, dopodiché aggiungere ancora qualche punto e verificare che il fiocco si generi in live. |
+|**Risultati attesi** |Dopo aver aggiunto i punti e tagliato il triangolo cliccando il Button "Genera live" si vede apparire il fiocco e continuando ad aggiungere punti il risultato continua a cambiare. |
+
+|Test Case      | TC-004                               |
+|---------------|--------------------------------------|
+|**Nome**       |Salvataggio/Importazione dei punti. |                         |
+|**Descrizione**|Tramite i due Button "Save Points" e "Import Points" i punti possono essere salvati e importati a piacimento.|
+|**Prerequisiti**|Aggiunta/rimozione dei punti |
+|**Procedura**     | Aggiungere qualche punto e utilizzare il Button "Save Points", salvare i punti, dopodiché cancellare i punti e ri-importare i punti con il Button "Import Points." |
+|**Risultati attesi** |I punti vengono salvati nel file e dopo averli importati nel il progetto torna com'era quando è stato salvato. |
+
+|Test Case      | TC-005                               |
+|---------------|--------------------------------------|
+|**Nome**       |Modalità Subtract/Intersect |                         |
+|**Descrizione**|Grazie ai due CheckBox appositi si può scegliere se utilizzare la modalità intersect o subtract.|
+|**Prerequisiti**|Taglio del triangolo. |
+|**Procedura**     | Aggiungere qualche punto fino a quando il triangolo viene tagliato, dopodiché provare a cambiare subtract e intersect, facendolo il fiocco risultante dovrebbe cambiare. |
+|**Risultati attesi** |Cambiando la modalità il fiocco risultante cambierà e si potrà avere due risultati con gli stessi punti. |
+
+|Test Case      | TC-006                               |
+|---------------|--------------------------------------|
+|**Nome**       |Download dal sito web |                         |
+|**Descrizione**|Dal sito web attraverso i due pulsanti di download si potrà scaricare il .jar e il source in .zip|
+|**Prerequisiti**|Finire il codice e il sito web. |
+|**Procedura**     | Andare sul sito e schiacciare i due pulsanti di download e verificare che i file si scarichino e siano corretti. |
+|**Risultati attesi** |Il sito web funziona e con i pulsanti di download si possono scaricare i due file senza problemi. |
 
 ### Risultati test
 
-Tabella riassuntiva in cui si inseriscono i test riusciti e non del
-prodotto finale. Se un test non riesce e viene corretto l’errore, questo
-dovrà risultare nel documento finale come riuscito (la procedura della
-correzione apparirà nel diario), altrimenti dovrà essere descritto
-l’errore con eventuali ipotesi di correzione.
+<h5>TC-001</h5>
+Con il click sinistro i punti si aggiungono e col tasto destro i punti si cancellano.
+
+<span style="color:green">Test riuscito.</span>
+
+<h5>TC-002</h5>
+Dopo aver aggiunto almeno 3 punti il triangolo comincia a cambiare.
+
+<span style="color:green">Test riuscito.</span>
+
+<h5>TC-003</h5>
+Cliccando su "Genera Live" il fiocco inizia a generarsi in live e cambia quando cambia il triangolo.
+
+<span style="color:green">Test riuscito.</span>
+
+<h5>TC-004</h5>
+I punti vengono salvati senza dare errori e quando vengono ri-importati funzionano come prima.
+
+<span style="color:green">Test riuscito.</span>
+
+<h5>TC-005</h5>
+Dopo aver attivato la generazione live cambiando la modalità da Intersect a Subtract e viceversa i tagli e il fiocco cambiano.
+
+<span style="color:green">Test riuscito.</span>
+
+<h5>TC-006</h5>
+Il sito web è raggiungibile e online, con i pulsanti i download del .jar e del .zip partono senza problemi.
+
+<span style="color:green">Test riuscito.</span>
 
 ### Mancanze/limitazioni conosciute
 
-Descrizione con motivazione di eventuali elementi mancanti o non
-completamente implementati, al di fuori dei test case. Non devono essere
-riportati gli errori e i problemi riscontrati e poi risolti durante il
-progetto.
+Purtroppo per vari motivi non sono riuscito a sviluppare tutto quello che volevo fare. Non sono riuscito a fare il responsive della pagina perché dopo aver generato il fiocco ho avuto dei problemi che mi hanno portato a dover bloccare la ridimensionizzazione della finestra. Invece per motivi di tempo non sono riuscito a implementare lo spostamento dei punti e il salvataggio dell'immagine.
 
 ## Consuntivo
 
-Consuntivo del tempo di lavoro effettivo e considerazioni riguardo le
-differenze rispetto alla pianificazione (cap 1.7) (ad esempio Gannt
-consuntivo).
+Come ho già detto in precedenza in questo progetto non sono riuscito a gestirmi bene con il gantt, cercherò di farci più attenzione la prossima volta. Effetivamente credo che tenere un Gantt fatto bene mi avrebbe potuto aiutare.
 
 ## Conclusioni
 
-Quali sono le implicazioni della mia soluzione? Che impatto avrà?
-Cambierà il mondo? È un successo importante? È solo un’aggiunta
-marginale o è semplicemente servita per scoprire che questo percorso è
-stato una perdita di tempo? I risultati ottenuti sono generali,
-facilmente generalizzabili o sono specifici di un caso particolare? ecc
+Io credo che questo software non avrà un grande impatto su gli utenti che andranno a utilizzarlo, ma sicuramente ne ha avuto su di me che sono migliorato in programmazione e mi sono reso conto di alcune lacune che avevo. È vero che il software che ne è uscito non ha nessuna utilità, io personalmente non lo scaricherei mai, però per me è importante perché è solo una piccola parte della mia formazione che mi ha aiutato a crescere.
 
 ### Sviluppi futuri
-  Migliorie o estensioni che possono essere sviluppate sul prodotto.
+  Credo che per migliorarlo bisognerebbe sicuramente aggiungere le features mancanti, ma anche sistemare un po' il codice separandolo in più classi perché non è molto ordinato.
 
 ### Considerazioni personali
-  Cosa ho imparato in questo progetto? ecc
+  Ho imparato molto, come ho scritto anche sopra, questo progetto mi ha aiutato a migliorare in programmazione e mi ha fatto notare quanto sia importante un Gantt in un progetto. Credo che la prossima volta ci farò più attenzione in modo da poter gestire il tempo al meglio. Mentre per il mio feedback: Sono contento di aver sviluppato questo progetto perché è bello fare un po' di pratica oltre alla solita teoria che abbiamo fatto fino ad adesso.
 
-## Bibliografia
-
-### Bibliografia per articoli di riviste
-1.  Cognome e nome (o iniziali) dell’autore o degli autori, o nome
-    dell’organizzazione,
-
-2.  Titolo dell’articolo (tra virgolette),
-
-3.  Titolo della rivista (in italico),
-
-4.  Anno e numero
-
-5.  Pagina iniziale dell’articolo,
-
-### Bibliografia per libri
-
-
-1.  Cognome e nome (o iniziali) dell’autore o degli autori, o nome
-    dell’organizzazione,
-
-2.  Titolo del libro (in italico),
-
-3.  ev. Numero di edizione,
-
-4.  Nome dell’editore,
-
-5.  Anno di pubblicazione,
-
-6.  ISBN.
-
-### Sitografia
-
-1.  URL del sito (se troppo lungo solo dominio, evt completo nel
-    diario),
-
-2.  Eventuale titolo della pagina (in italico),
-
-3.  Data di consultazione (GG-MM-AAAA).
-
-**Esempio:**
-
--   http://standards.ieee.org/guides/style/section7.html, *IEEE
-    Standards Style Manual*, 07-06-2008.
 
 ## Allegati
 
@@ -313,17 +290,6 @@ Elenco degli allegati, esempio:
 
 -   Diari di lavoro
 
--   Codici sorgente/documentazione macchine virtuali
+-   Codici sorgente
 
--   Istruzioni di installazione del prodotto (con credenziali
-    di accesso) e/o di eventuali prodotti terzi
-
--   Documentazione di prodotti di terzi
-
--   Eventuali guide utente / Manuali di utilizzo
-
--   Mandato e/o Qdc
-
--   Prodotto
-
--   …
+-   [Sito Web](http://www.samtinfo.ch/i17fermos).
