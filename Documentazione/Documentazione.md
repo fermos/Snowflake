@@ -155,9 +155,9 @@ Durante il progetto ho cambiato idea sul come fare l'interfaccia e credo che il 
 <img src="Immagini/guiproject.png" alt="guiproject.png" style="float left;"/>
 
 <h4>Interfacce finali:</h4>
-<img src="Immagini/gui_home.png" alt="gui_home.png" style="float left;"/>
+<img src="Immagini/gui_home.PNG" alt="gui_home.png" style="float left;"/>
 <p></p>
-<img src="Immagini/gui.png" alt="gui.png" style="float left;"/>
+<img src="Immagini/gui.PNG" alt="gui.png" style="float left;"/>
 
 ### Design procedurale
 
