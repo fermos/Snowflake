@@ -125,7 +125,7 @@
 |Darkmode|CheckBox|Permette di attivare e disattivare la darkmode.|
 
 <h4>Gantt preventivo</h4>
-<img src="Immagini/ganttpreventivo.png" alt="ganttpreventivo.png" style="float left;"/>
+<img src="Immagini/ganttpreventivo.PNG" alt="ganttpreventivo.png" style="float left;"/>
 
 ### Analisi dei mezzi
 
