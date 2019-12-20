@@ -106,11 +106,11 @@
 
 ### Use case
 
-L'utente può tagliare il triangolo iniziale e
-generarci un fiocco di neve dopodiché potrà salvare i punti
-e ricaricarli quando vuole.
+<img src="Immagini/usecase.png" alt="UML.png" style="float left;"/>
 
 ### Pianificazione
+
+<h4>Funzioni componenti</h4>
 
 |**Nome**	|**Componente**|**Utilizzo**|
 |---------|--------------|------------|
@@ -123,6 +123,9 @@ e ricaricarli quando vuole.
 |Subtract/Intersect|2 CheckBox|Permette di scegliere se usare il metodo Intersect o Subtract per creare il fiocco di neve.|
 |Show Points|CheckBox|Permette di scegliere se vedere o no i punti creati.|
 |Darkmode|CheckBox|Permette di attivare e disattivare la darkmode.|
+
+<h4>Gantt preventivo</h4>
+<img src="Immagini/ganttpreventivo.png" alt="ganttpreventivo.png" style="float left;"/>
 
 ### Analisi dei mezzi
 
@@ -159,24 +162,24 @@ Durante il progetto ho cambiato idea sul come fare l'interfaccia e credo che il 
 <p></p>
 <img src="Immagini/gui.png" alt="gui.png" style="float left;"/>
 
-### Design procedurale
+### Design
 
-[Documentazione java](javadoc/index.html/)
+[Documentazione java](javadoc)
 
 ## Implementazione
 
 Descrizione classi:
 
-<h4>StartFrame:</h4>
+<h4>StartFrame</h4>
 Il frame che si apre inizialmente che permette di o creare un nuovo fiocco di neve o di importarlo da un file. Dopo la selezione di una delle due opzioni si passa a SnowflakeFrame.
 
-<h4>SnowflakeFrame:</h4>
+<h4>SnowflakeFrame</h4>
 Si tratta del frame che ospita l'applicazione principale con i vari panel tra cui SnowflakePanel.
 
-<h4>SnowflakePanel:</h4>
+<h4>SnowflakePanel</h4>
 Si occupa di praticamente tutto il funzionamento dell'applicazione. Si occupa dei tagli del triangolo e della generazione del fiocco con tutte le funzioni in più come: Cancellare i punti, mettere la darkmode, nascondere i punti, ...
 
-<h4>Saver:</h4>
+<h4>Saver</h4>
 Questa classe si occupa di salvare e importare da dei file .flake, e lo fa interagendo con la classe SnowflakePanel.
 
 
@@ -271,7 +274,9 @@ Purtroppo per vari motivi non sono riuscito a sviluppare tutto quello che volevo
 
 ## Consuntivo
 
-Come ho già detto in precedenza in questo progetto non sono riuscito a gestirmi bene con il gantt, cercherò di farci più attenzione la prossima volta. Effetivamente credo che tenere un Gantt fatto bene mi avrebbe potuto aiutare.
+In questo progetto non sono riuscito a gestirmi bene con il gantt, cercherò di farci più attenzione la prossima volta.
+
+<img src="Immagini/ganttconsuntivo.PNG" alt="ganttconsuntivo.png" style="float left;"/>
 
 ## Conclusioni
 
@@ -285,8 +290,6 @@ Io credo che questo software non avrà un grande impatto su gli utenti che andra
 
 
 ## Allegati
-
-Elenco degli allegati, esempio:
 
 -   Diari di lavoro
 

@@ -1,36 +1,38 @@
 
 import java.awt.Color;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+import java.io.IOException;
+import java.nio.file.Path;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author mosef
+ * @author Mosè Ferrazzini
+ * @version 20.12.2019
  */
 public class SnowflakeFrame extends javax.swing.JFrame {
 
+    /**
+     * Se la darmode è abilitata true = abilitata.
+     */
     private boolean darkmodeEnabled = false;
-    private int oldWidth = 0;
-    private int oldHeight = 0;
+    /**
+     * Se subtract è abilitato true = subtract, false = intersect
+     */
+    private boolean subtractEnabled = true;
+
     /**
      * Creates new form SnowflakeFrame
      */
     public SnowflakeFrame() {
+        ImageIcon imgicon = new ImageIcon("../flakeIcon.ico");
+        this.setIconImage(imgicon.getImage());
         initComponents();
         snowflakePanel1.setVisible(true);
-        generaLiveButton.setBackground(Color.WHITE);
-        generaLiveButton.setForeground(Color.BLACK);
-        savePointsButton.setBackground(Color.WHITE);
-        savePointsButton.setForeground(Color.BLACK);
-        leftPanel.setBackground(Color.WHITE);
-        darkmodeCheckBox.setForeground(Color.BLACK);
-        darkmodeCheckBox.setBackground(Color.WHITE);
-        deletePointsButton.setForeground(Color.BLACK);
-        deletePointsButton.setBackground(Color.WHITE);
+        this.switchDarkmode();
+        this.setTitle("Snowflake");
     }
 
     /**
@@ -42,30 +44,32 @@ public class SnowflakeFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCheckBox2 = new javax.swing.JCheckBox();
         leftPanel = new javax.swing.JPanel();
         generaLiveButton = new javax.swing.JButton();
         savePointsButton = new javax.swing.JButton();
+        importPointsButton = new javax.swing.JButton();
         deletePointsButton = new javax.swing.JButton();
+        selectModePanel = new javax.swing.JPanel();
+        subtractCheckBox = new javax.swing.JCheckBox();
+        intersectCheckBox = new javax.swing.JCheckBox();
+        showPointsCheckBox = new javax.swing.JCheckBox();
         darkmodeCheckBox = new javax.swing.JCheckBox();
         snowflakePanel1 = new SnowflakePanel();
-
-        jCheckBox2.setText("jCheckBox2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(null);
-        setMinimumSize(new java.awt.Dimension(640, 500));
+        setMinimumSize(new java.awt.Dimension(650, 500));
         setName("SnowflakeFrame"); // NOI18N
         setResizable(false);
-        setSize(new java.awt.Dimension(500, 650));
+        setSize(new java.awt.Dimension(550, 650));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
             }
         });
 
-        leftPanel.setLayout(new java.awt.GridLayout(4, 1));
+        leftPanel.setLayout(new java.awt.GridLayout(7, 1));
 
         generaLiveButton.setText("Genera live");
         generaLiveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +80,20 @@ public class SnowflakeFrame extends javax.swing.JFrame {
         leftPanel.add(generaLiveButton);
 
         savePointsButton.setText("Save Points");
+        savePointsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                savePointsButtonActionPerformed(evt);
+            }
+        });
         leftPanel.add(savePointsButton);
+
+        importPointsButton.setText("Import Points");
+        importPointsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importPointsButtonActionPerformed(evt);
+            }
+        });
+        leftPanel.add(importPointsButton);
 
         deletePointsButton.setText("Delete points");
         deletePointsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +102,36 @@ public class SnowflakeFrame extends javax.swing.JFrame {
             }
         });
         leftPanel.add(deletePointsButton);
+
+        selectModePanel.setLayout(new java.awt.GridLayout(2, 1));
+
+        subtractCheckBox.setSelected(true);
+        subtractCheckBox.setText("Subtract");
+        subtractCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subtractCheckBoxActionPerformed(evt);
+            }
+        });
+        selectModePanel.add(subtractCheckBox);
+
+        intersectCheckBox.setText("Intersect");
+        intersectCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                intersectCheckBoxActionPerformed(evt);
+            }
+        });
+        selectModePanel.add(intersectCheckBox);
+
+        leftPanel.add(selectModePanel);
+
+        showPointsCheckBox.setSelected(true);
+        showPointsCheckBox.setText("Show Points");
+        showPointsCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showPointsCheckBoxActionPerformed(evt);
+            }
+        });
+        leftPanel.add(showPointsCheckBox);
 
         darkmodeCheckBox.setText("Darkmode");
         darkmodeCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -106,12 +153,6 @@ public class SnowflakeFrame extends javax.swing.JFrame {
         snowflakePanel1.switchLive();
     }//GEN-LAST:event_generaLiveButtonActionPerformed
 
-    private void darkmodeCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkmodeCheckBoxActionPerformed
-        darkmodeEnabled = !darkmodeEnabled;
-        switchDarkmode();
-        snowflakePanel1.switchDarkmode();
-    }//GEN-LAST:event_darkmodeCheckBoxActionPerformed
-
     private void deletePointsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePointsButtonActionPerformed
         snowflakePanel1.deletePoints();
     }//GEN-LAST:event_deletePointsButtonActionPerformed
@@ -119,6 +160,77 @@ public class SnowflakeFrame extends javax.swing.JFrame {
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
  
     }//GEN-LAST:event_formComponentResized
+
+    private void savePointsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePointsButtonActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new java.io.File("."));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("snowflake files (*.flake)", "flake");
+        chooser.addChoosableFileFilter(filter);
+        chooser.setFileFilter(filter);
+        chooser.setDialogTitle("Save points");
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            Path dest = chooser.getSelectedFile().toPath();
+            try {
+                Saver s = new Saver(snowflakePanel1.getCutPoints(), snowflakePanel1.getTrianglePoints(), dest);
+                showMessageDialog(null, "Punti in salvati in " + dest.getFileName() + " con successo!");
+            } catch (IOException ioe) {
+                showMessageDialog(null, "C'è stato un errore nel salvataggio, riprova!");
+            }
+        }
+    }//GEN-LAST:event_savePointsButtonActionPerformed
+
+    private void importPointsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importPointsButtonActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new java.io.File("."));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("snowflake files (*.flake)", "flake");
+        chooser.addChoosableFileFilter(filter);
+        chooser.setFileFilter(filter);
+        chooser.setDialogTitle("Import points");
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            Path origine = chooser.getSelectedFile().toPath();
+            try {
+                Saver s = new Saver(origine);
+                snowflakePanel1.setTrianglePoints(s.getTrianglePoints());
+                snowflakePanel1.setCutPoints(s.getCutPoints());
+            }catch (IOException ioe) {
+                showMessageDialog(null, "Impossibile leggere il file.");
+            }
+        }
+    }//GEN-LAST:event_importPointsButtonActionPerformed
+
+    private void darkmodeCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkmodeCheckBoxActionPerformed
+        darkmodeEnabled = !darkmodeEnabled;
+        switchDarkmode();
+        snowflakePanel1.switchDarkmode();
+    }//GEN-LAST:event_darkmodeCheckBoxActionPerformed
+
+    private void subtractCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subtractCheckBoxActionPerformed
+        if(subtractCheckBox.isSelected()) {
+            intersectCheckBox.setSelected(false);
+            subtractEnabled = true;
+        }else{
+            intersectCheckBox.setSelected(true);
+            subtractEnabled = false;
+        }
+        snowflakePanel1.setMode(subtractEnabled);
+    }//GEN-LAST:event_subtractCheckBoxActionPerformed
+
+    private void intersectCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_intersectCheckBoxActionPerformed
+        if(intersectCheckBox.isSelected()) {
+            subtractCheckBox.setSelected(false);
+            subtractEnabled = false;
+        }else{
+            subtractCheckBox.setSelected(true);
+            subtractEnabled = true;
+        }
+        snowflakePanel1.setMode(subtractEnabled);
+    }//GEN-LAST:event_intersectCheckBoxActionPerformed
+
+    private void showPointsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPointsCheckBoxActionPerformed
+        snowflakePanel1.switchShowPoints();
+    }//GEN-LAST:event_showPointsCheckBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,16 +278,28 @@ public class SnowflakeFrame extends javax.swing.JFrame {
              darkmodeCheckBox.setBackground(Color.BLACK); 
              deletePointsButton.setForeground(Color.WHITE);
              deletePointsButton.setBackground(Color.BLACK);
+             importPointsButton.setForeground(Color.WHITE);
+             importPointsButton.setBackground(Color.BLACK);
+             subtractCheckBox.setForeground(Color.WHITE);
+             intersectCheckBox.setForeground(Color.WHITE);
+             selectModePanel.setBackground(Color.DARK_GRAY);
+             showPointsCheckBox.setForeground(Color.WHITE);
         }else{
              generaLiveButton.setBackground(Color.WHITE);
              generaLiveButton.setForeground(Color.BLACK);
              savePointsButton.setBackground(Color.WHITE);
              savePointsButton.setForeground(Color.BLACK);
-             leftPanel.setBackground(Color.WHITE);   
+             leftPanel.setBackground(Color.WHITE);
              darkmodeCheckBox.setForeground(Color.BLACK);
              darkmodeCheckBox.setBackground(Color.WHITE); 
              deletePointsButton.setForeground(Color.BLACK);
              deletePointsButton.setBackground(Color.WHITE);
+             importPointsButton.setForeground(Color.BLACK);
+             importPointsButton.setBackground(Color.WHITE);
+             subtractCheckBox.setForeground(Color.BLACK);
+             intersectCheckBox.setForeground(Color.BLACK);
+             selectModePanel.setBackground(Color.WHITE);
+             showPointsCheckBox.setForeground(Color.BLACK);
         }
     }
 
@@ -183,9 +307,13 @@ public class SnowflakeFrame extends javax.swing.JFrame {
     private javax.swing.JCheckBox darkmodeCheckBox;
     private javax.swing.JButton deletePointsButton;
     private javax.swing.JButton generaLiveButton;
-    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JButton importPointsButton;
+    private javax.swing.JCheckBox intersectCheckBox;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JButton savePointsButton;
-    private SnowflakePanel snowflakePanel1;
+    private javax.swing.JPanel selectModePanel;
+    private javax.swing.JCheckBox showPointsCheckBox;
+    protected SnowflakePanel snowflakePanel1;
+    private javax.swing.JCheckBox subtractCheckBox;
     // End of variables declaration//GEN-END:variables
 }
